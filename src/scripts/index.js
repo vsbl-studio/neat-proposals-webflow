@@ -4,7 +4,7 @@ import {
     revealFooter,
 } from "./modules/smoothScroll";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import navigation from "./modules/navigation";
+import { mobileNavigation, desktopNavigation } from "./modules/navigation";
 import accordion from "./modules/accordion";
 import currentYear from "./modules/currentYear";
 import { isMobile } from "./utils/isMobile";
@@ -15,7 +15,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // cookieYes();
     textReveal();
     syncScrollWithGSAP();
-    navigation();
+
+    mobileNavigation();
+    desktopNavigation();
+
     accordion();
     revealFooter();
     currentYear();
