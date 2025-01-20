@@ -1,0 +1,16 @@
+.js-accordion-head {
+    cursor: pointer;
+}
+.js-accordion-body {
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    transition: height 0.3s ease, opacity 0.3s ease;
+}
+.js-accordion-item.active .js-accordion-body {
+    opacity: 1;
+}
+
+.js-accordion-item.active .js-accordion-head .plus-icon {
+    height: 100%;
+}

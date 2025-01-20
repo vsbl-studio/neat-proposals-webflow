@@ -1,0 +1,17 @@
+@import "../../node_modules/lenis/dist/lenis.css";
+@import "../../node_modules/swiper/swiper-bundle.css";
+@import "../../node_modules/overlayscrollbars/styles/overlayscrollbars.css";
+@import "./modules/global.css";
+@import "./modules/scrollbars.css";
+
+@import "./modules/marquee.css";
+@import "./modules/accordion.css";
+@import "./modules/tooltip.css";
+
+.js-reveal-title {
+    opacity: 0;
+}
+.js-reveal-title .text-line-icon,
+.js-reveal-title .text-line-icon-50 {
+    margin-bottom: 1%;
+}

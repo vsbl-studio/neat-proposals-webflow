@@ -1,0 +1,11 @@
+.tooltip_rates-content,
+.tooltip_button-content {
+    opacity: 0;
+    transform: translateY(-2rem);
+}
+
+.tooltip_rates-wrapper:hover .tooltip_rates-content,
+.tooltip_button-wrapper:hover .tooltip_button-content {
+    opacity: 1;
+    transform: translateY(0);
+}
