@@ -12,5 +12,5 @@
 }
 
 .js-accordion-item.active .js-accordion-head .plus-icon {
-    height: 100%;
+    height: 0;
 }

@@ -79,8 +79,8 @@ export const mobileNavigation = () => {
             })
                 .set(".menu_dropdown", { display: "block" }) // Ensure dropdown is visible
                 .set(button, {
-                    color: "var(--brand--orange)",
-                    background: "var(--brand--black)",
+                    color: "tomato",
+                    background: "black",
                 })
                 .to(
                     ".menu_background",

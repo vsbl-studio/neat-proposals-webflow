@@ -6,6 +6,7 @@ import {
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { mobileNavigation, desktopNavigation } from "./modules/navigation";
 import accordion from "./modules/accordion";
+import marquee from "./modules/marquee";
 import currentYear from "./modules/currentYear";
 import { isMobile } from "./utils/isMobile";
 import gsap from "gsap";
@@ -15,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // cookieYes();
     textReveal();
     syncScrollWithGSAP();
-
+    marquee();
     mobileNavigation();
     desktopNavigation();
 
