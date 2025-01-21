@@ -1,7 +1,9 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { lenisInstance } from "./smoothScroll";
+gsap.registerPlugin(ScrollTrigger);
+
 export default () => {
-    gsap.registerPlugin(ScrollTrigger);
     const marqueeContent = document.querySelector(".marquee_content");
     if (!marqueeContent) return;
 
@@ -30,6 +32,7 @@ export default () => {
         end: "bottom top",
         scrub: true,
         onUpdate: (self) => {
+            console.log("self", self);
             const velocity = Math.abs(self.getVelocity()); // Get absolute scroll velocity (handles both up and down scrolling)
             const scrollSpeedFactor = Math.max(1, velocity / 150); // Scale speed proportionally to velocity
             updateSpeed(scrollSpeedFactor); // Update marquee speed dynamically

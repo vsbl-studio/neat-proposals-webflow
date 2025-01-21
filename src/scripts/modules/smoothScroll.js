@@ -1,29 +1,57 @@
-import LocomotiveScroll from "locomotive-scroll";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import Lenis from "lenis";
+
 gsap.registerPlugin(ScrollTrigger);
 
-export const locomotiveScroll = new LocomotiveScroll({
-    el: document.body, // Ensure your scroll container is specified
-    smooth: true,
-    lerp: 1, // Smoothing factor
-    multiplier: 0.1,
-});
-
-export const syncScrollWithGSAP = () => {
-    const lenisInstance = locomotiveScroll.lenisInstance;
-
-    lenisInstance.on("scroll", function () {
-        locomotiveScroll.resize();
-        ScrollTrigger.refresh();
-        ScrollTrigger.update();
+export const smoothScroll = () => {
+    let lenis = new Lenis({
+        lerp: 0.1,
     });
 
+    lenis.on("scroll", ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+    });
+
+    gsap.ticker.lagSmoothing(0);
+
+    const anchorLinks = document.querySelectorAll(
+        'a[href^="#"]:not(a[href="#"])'
+    );
+
+    if (!anchorLinks.length) return;
+
+    anchorLinks.forEach((anchor) => {
+        anchor.addEventListener("click", (e) => {
+            e.preventDefault();
+
+            // Find the closest <a> element in case of nested clicks
+            const link = e.target.closest('a[href^="#"]');
+            if (!link) return;
+
+            const href = link.getAttribute("href");
+            const target = document.querySelector(href);
+
+            if (target) {
+                // Use Lenis scrollTo method for smooth scrolling
+                lenis.scrollTo(target, {
+                    duration: 1.25, // Duration of the scroll (in seconds)
+                    easing: (t) =>
+                        t < 0.5
+                            ? 4 * t * t * t
+                            : 1 - Math.pow(-2 * t + 2, 3) / 2,
+                });
+            }
+        });
+    });
+};
+
+export const syncScrollWithGSAP = () => {
     const resizeObserver = new ResizeObserver(() => {
-        locomotiveScroll.resize();
         ScrollTrigger.refresh();
-        ScrollTrigger.update();
     });
 
     resizeObserver.observe(document.body); // Start observing body size changes

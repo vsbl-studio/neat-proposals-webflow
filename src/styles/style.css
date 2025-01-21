@@ -22,3 +22,12 @@
 [data-mask-btn].is-current .mask-wrap > :nth-child(2) {
     transform: translateY(0%);
 }
+[data-mask-button] .button_icon.w-embed {
+    order: 10;
+}
+[data-mask-button] .button_icon.w-embed + div {
+    max-width: fit-content !important;
+}
+.nav_menu_link-wrapper.w--current {
+    margin-left: 0;
+}
