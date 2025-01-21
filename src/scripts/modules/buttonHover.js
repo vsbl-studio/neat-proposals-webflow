@@ -1,9 +1,10 @@
 import gsap from "gsap";
 import { isMobile } from "../utils/isMobile";
+import { customEase } from "../utils/globalElements";
 
 export default () => {
     const buttonHovers = document.querySelectorAll("[data-mask-button]");
-    if (buttonHovers.length && !isMobile.any()) {
+    if (buttonHovers.length) {
         buttonHovers.forEach((btn) => {
             const textWrapper = btn.querySelector("[data-mask-text]");
 
@@ -45,14 +46,14 @@ export default () => {
                         y: -textWrapper.clientHeight,
                         x: "",
                         duration: 0.5,
-                        ease: "power2.out",
+                        ease: customEase,
                     });
 
                     gsap.to(lines[1], {
                         y: -textWrapper.clientHeight,
                         x: "",
                         duration: 0.5,
-                        ease: "power2.out",
+                        ease: customEase,
                     });
                 });
 
@@ -64,19 +65,47 @@ export default () => {
                         y: 0,
                         x: "",
                         duration: 0.5,
-                        ease: "power2.out",
+                        ease: customEase,
                     });
 
                     gsap.to(lines[1], {
                         y: 0,
                         x: "",
                         duration: 0.5,
-                        ease: "power2.out",
+                        ease: customEase,
                     });
                 });
 
                 // Recalculate dimensions on resize
                 window.addEventListener("resize", updateDimensions);
+
+                const navMobileWrapper = document.querySelector(
+                    ".nav_wrapper-mobile"
+                );
+
+                if (navMobileWrapper) {
+                    navMobileWrapper.addEventListener(
+                        "mouseenter",
+                        function () {
+                            setTimeout(() => {
+                                updateDimensions();
+                            }, 100);
+                        }
+                    );
+                }
+
+                const navbarMenuTrigger = document.querySelector(
+                    ".navbar_menu-trigger"
+                );
+
+                if (navbarMenuTrigger) {
+                    console.log("clikc");
+                    navbarMenuTrigger.addEventListener("click", function () {
+                        setTimeout(() => {
+                            updateDimensions();
+                        }, 100);
+                    });
+                }
             }
         });
     }

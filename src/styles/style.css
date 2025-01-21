@@ -15,13 +15,13 @@
     margin-bottom: 1%;
 }
 
-[data-mask-btn].is-current .mask-wrap > :nth-child(1) {
+/* [data-mask-btn].is-current .mask-wrap > :nth-child(1) {
     transform: translateY(-100%);
 }
 
 [data-mask-btn].is-current .mask-wrap > :nth-child(2) {
     transform: translateY(0%);
-}
+} */
 [data-mask-button] .button_icon.w-embed {
     order: 10;
 }
@@ -30,4 +30,15 @@
 }
 .nav_menu_link-wrapper.w--current {
     margin-left: 0;
+}
+.nav_wrapper-mobile
+    .navbar_menu-trigger.is-open
+    + div
+    .menu_wrap
+    .nav_menu.w-nav-menu {
+    display: block !important;
+}
+.horizontal-divider {
+    transform: scaleX(0);
+    transform-origin: left;
 }

@@ -59,19 +59,31 @@ export const syncScrollWithGSAP = () => {
 
 // Footer Reveal Animation
 export const revealFooter = () => {
-    gsap.set(".section_footer", { yPercent: 50 });
+    const footer = document.querySelector("footer");
 
-    const uncover = gsap.timeline({ paused: true });
-    uncover.to(".section_footer", { yPercent: 0, ease: "none" });
+    const footerContent = footer.querySelector(
+        '[data-footer-parallax="content"]'
+    );
 
-    const footerHeight = document.querySelector(".section_footer").offsetHeight;
+    const footerHeight = footerContent.getBoundingClientRect().height;
+    footer.style.height = footerHeight + "px";
 
-    ScrollTrigger.create({
-        trigger: ".main-wrapper",
-        start: "bottom bottom",
-        end: `+=${footerHeight}`,
-        animation: uncover,
-        scrub: true,
-        markers: true,
+    let tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: footer,
+            start: "top bottom",
+            end: "bottom bottom",
+            scrub: 0.01,
+        },
     });
+
+    tl.from(
+        footerContent,
+        {
+            yPercent: -50,
+            ease: "linear",
+        },
+
+        "<"
+    );
 };

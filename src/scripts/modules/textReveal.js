@@ -12,7 +12,6 @@ export default function () {
                 lineWrapper.style.overflow = "hidden";
                 line.parentNode.insertBefore(lineWrapper, line);
                 lineWrapper.appendChild(line);
-                console.log(lineWrapper.offsetHeight);
                 wrapperheight = lineWrapper.offsetHeight;
             });
             title.style.opacity = 1;

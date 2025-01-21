@@ -1,13 +1,7 @@
 import gsap from "gsap";
-import { CustomEase } from "gsap/CustomEase";
-
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { customEase } from "../utils/globalElements";
 export const mobileNavigation = () => {
-    gsap.registerPlugin(CustomEase);
-
-    CustomEase.create(
-        "custom",
-        "M0,0 C0.204,0 0.192,0.726 0.318,0.852 0.45,0.984 0.504,1 1,1"
-    );
     const menu = document.querySelector('[data-menu-animation="menu"]');
     if (!menu) return;
 
@@ -34,9 +28,15 @@ export const mobileNavigation = () => {
             })
                 .set(".menu_dropdown", { display: "block" }) // Ensure dropdown is visible
                 .set(button, {
-                    color: "tomato",
+                    color: "white",
                     background: "black",
                 })
+                .to(
+                    ".nav_wrapper-mobile .navbar_menu-trigger.is-open + div .menu_wrap .nav_menu.w-nav-menu",
+                    {
+                        display: "block",
+                    }
+                )
                 .to(
                     ".menu_background",
                     {
@@ -44,11 +44,12 @@ export const mobileNavigation = () => {
                         right: 0,
                         width: "100%",
                         height: "100%",
-                        ease: "custom",
+                        ease: customEase,
                         duration: 1,
                     },
                     "<"
                 )
+
                 .fromTo(
                     ".menu_wrap",
                     { opacity: 0 },
@@ -68,7 +69,7 @@ export const mobileNavigation = () => {
                 right: "0.5rem",
                 width: 0,
                 height: 0,
-                ease: "custom",
+                ease: customEase,
                 duration: 1,
             })
                 .to(
@@ -77,6 +78,12 @@ export const mobileNavigation = () => {
                     "<"
                 )
                 .set(button, { color: "", background: "" }, "<")
+                .to(
+                    ".nav_wrapper-mobile .navbar_menu-trigger.is-open + div .menu_wrap .nav_menu.w-nav-menu",
+                    {
+                        display: "none",
+                    }
+                )
                 .set(".menu_dropdown", {
                     display: "none",
                 }); // Hide dropdown
@@ -103,13 +110,10 @@ export const mobileNavigation = () => {
         () => {
             // Desktop-specific event listeners
             menu.addEventListener("mouseenter", () => {
-                console.log("mouseenter");
-
                 animateDropdown(true);
             });
 
             menu.addEventListener("mouseleave", () => {
-                console.log("mouseleave");
                 animateDropdown(false);
             });
 
@@ -135,4 +139,35 @@ export const mobileNavigation = () => {
             animateDropdown(false); // Close dropdown
         }
     });
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const navbar = document.querySelector(".nav_component");
+    if (!navbar) return;
+
+    let headTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "footer",
+            start: `top 35%`,
+            toggleActions: "play none none reverse",
+            // toggleClass: { targets: navbar, className: "is-footer" },
+        },
+    });
+
+    headTl.to(navbar, {
+        opacity: 0,
+        duration: 0.2,
+        ease: "linear",
+    });
+
+    // gsap.to(".nav_component", {
+    //     scrollTrigger: {
+    //         trigger: ".nav_component",
+    //         start: "top top", // Pin the nav when it reaches the top of the viewport
+    //         endTrigger: ".main-wrapper", // Stop pinning when the footer starts
+    //         end: "bottom bottom", // End pinning when the footer's top aligns with the bottom of the viewport
+    //         pin: true, // Pin the element
+    //         pinSpacing: false, // Optional: Prevent adding extra space after the pinned element
+    //     },
+    // });
 };
