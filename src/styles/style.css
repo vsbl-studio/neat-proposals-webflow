@@ -14,14 +14,6 @@
 .js-reveal-title .text-line-icon-50 {
     margin-bottom: 1%;
 }
-
-/* [data-mask-btn].is-current .mask-wrap > :nth-child(1) {
-    transform: translateY(-100%);
-}
-
-[data-mask-btn].is-current .mask-wrap > :nth-child(2) {
-    transform: translateY(0%);
-} */
 [data-mask-button] .button_icon.w-embed {
     order: 10;
 }
@@ -39,6 +31,29 @@
     display: block !important;
 }
 .horizontal-divider {
-    transform: scaleX(0);
+    transform: scaleX(1);
     transform-origin: left;
+}
+
+.deliverables_image-wrapper {
+    overflow: hidden; /* Hides scrollbars but prevents scrolling */
+    /* Alternatively, use the below properties if you want to enable scrolling but hide scrollbars */
+    overflow: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+.deliverables_image-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, and Opera */
+}
+
+.js-accordion-item.active .js-accordion-body {
+    opacity: 1;
+}
+
+.js-accordion-item.active .js-accordion-head .plus-icon {
+    height: 0;
+}
+.footer-link-arrow {
+    order: 100;
 }

@@ -11,13 +11,13 @@ import marquee from "./modules/marquee";
 import currentYear from "./modules/currentYear";
 import buttonHover from "./modules/buttonHover";
 import textReveal from "./modules/textReveal";
-import borderAnimation from "./modules/borderAnimation";
+// import borderAnimation from "./modules/borderAnimation";
 document.addEventListener("DOMContentLoaded", function () {
     // Load modules
     // cookieYes();
     smoothScroll();
     textReveal();
-    borderAnimation();
+    // borderAnimation();
     buttonHover();
     imageParallax();
     syncScrollWithGSAP();

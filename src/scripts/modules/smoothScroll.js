@@ -5,11 +5,10 @@ import Lenis from "lenis";
 
 gsap.registerPlugin(ScrollTrigger);
 
+export const lenis = new Lenis({
+    lerp: 0.1,
+});
 export const smoothScroll = () => {
-    let lenis = new Lenis({
-        lerp: 0.1,
-    });
-
     lenis.on("scroll", ScrollTrigger.update);
 
     gsap.ticker.add((time) => {

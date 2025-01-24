@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { locomotiveScroll } from "./smoothScroll";
+import { lenis } from "./smoothScroll";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function () {
@@ -12,30 +12,18 @@ export default function () {
             const head = item.querySelector(".js-accordion-head");
             const body = item.querySelector(".js-accordion-body");
 
-            if (index > 0) {
-                gsap.set(body, {
-                    height: 0,
-                    opacity: 0,
+            gsap.set(body, {
+                height: 0,
+                opacity: 0,
+                duration: 0.6,
+                ease: "power3.inOut",
+                onComplete: () => {
+                    setTimeout(() => {
+                        ScrollTrigger.refresh();
+                    }, 300);
+                },
+            }); // Ensure body starts hidden
 
-                    onComplete: () => {
-                        setTimeout(() => {
-                            ScrollTrigger.refresh();
-                        }, 300);
-                    },
-                }); // Ensure body starts hidden
-            } else {
-                item.classList.add("active");
-                gsap.set(body, {
-                    height: "auto",
-                    opacity: 1,
-
-                    onComplete: () => {
-                        setTimeout(() => {
-                            ScrollTrigger.refresh();
-                        }, 300);
-                    },
-                }); // Ensure first item is open
-            }
             head.addEventListener("click", () => {
                 const isOpen = item.classList.contains("active");
 
@@ -65,8 +53,14 @@ export default function () {
                         duration: 0.3,
                         onComplete: () => {
                             setTimeout(() => {
-                                ScrollTrigger.refresh();
+                                lenis.scrollTo(item, {
+                                    offset: -25,
+                                    duration: 1.5,
+                                });
                             }, 300);
+                            setTimeout(() => {
+                                ScrollTrigger.refresh();
+                            }, 350);
                         },
                     });
                 }

@@ -39,41 +39,49 @@ export default () => {
 
                 // Add hover animations
                 btn.addEventListener("mouseenter", function () {
-                    const lines =
-                        wrapperDiv.querySelectorAll("[data-mask-text]");
+                    if (!btn.classList.contains("w--current")) {
+                        const lines =
+                            wrapperDiv.querySelectorAll("[data-mask-text]");
 
-                    gsap.to(lines[0], {
-                        y: -textWrapper.clientHeight,
-                        x: "",
-                        duration: 0.5,
-                        ease: customEase,
-                    });
+                        gsap.to(lines[0], {
+                            y: -textWrapper.clientHeight,
+                            duration: 0.3,
+                            ease: "linear",
 
-                    gsap.to(lines[1], {
-                        y: -textWrapper.clientHeight,
-                        x: "",
-                        duration: 0.5,
-                        ease: customEase,
-                    });
+                            // stagger: 0.12,
+                            // duration: 0.6,
+                            // ease: "custom",
+                        });
+
+                        gsap.to(lines[1], {
+                            y: -textWrapper.clientHeight,
+                            duration: 0.3,
+                            ease: "linear",
+
+                            // stagger: 0.12,
+                            // duration: 0.6,
+                            // ease: "custom",
+                        });
+                    }
                 });
 
                 btn.addEventListener("mouseleave", function () {
-                    const lines =
-                        wrapperDiv.querySelectorAll("[data-mask-text]");
+                    if (!btn.classList.contains("w--current")) {
+                        const lines =
+                            wrapperDiv.querySelectorAll("[data-mask-text]");
 
-                    gsap.to(lines[0], {
-                        y: 0,
-                        x: "",
-                        duration: 0.5,
-                        ease: customEase,
-                    });
+                        gsap.to(lines[0], {
+                            y: 0,
+                            duration: 0.3,
+                            ease: "linear",
+                        });
 
-                    gsap.to(lines[1], {
-                        y: 0,
-                        x: "",
-                        duration: 0.5,
-                        ease: customEase,
-                    });
+                        gsap.to(lines[1], {
+                            y: 0,
+                            duration: 0.3,
+                            ease: "linear",
+                        });
+                    }
                 });
 
                 // Recalculate dimensions on resize
@@ -99,7 +107,6 @@ export default () => {
                 );
 
                 if (navbarMenuTrigger) {
-                    console.log("clikc");
                     navbarMenuTrigger.addEventListener("click", function () {
                         setTimeout(() => {
                             updateDimensions();

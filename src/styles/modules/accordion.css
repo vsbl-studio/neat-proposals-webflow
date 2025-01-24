@@ -7,10 +7,10 @@
     opacity: 0;
     transition: height 0.3s ease, opacity 0.3s ease;
 }
-.js-accordion-item.is-open .js-accordion-body {
+.js-accordion-item.active .js-accordion-body {
     opacity: 1;
 }
 
-.js-accordion-item.is-open .js-accordion-head .plus-icon {
+.js-accordion-item.active .js-accordion-head .plus-icon {
     height: 0;
 }
