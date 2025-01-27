@@ -8,23 +8,20 @@ export default function () {
     accordions.forEach((acc) => {
         const accordionItems = acc.querySelectorAll(".js-accordion-item");
 
-        accordionItems.forEach((item, index) => {
+        if (!accordionItems.length) return;
+
+        accordionItems.forEach((item) => {
             const head = item.querySelector(".js-accordion-head");
             const body = item.querySelector(".js-accordion-body");
 
+            // Initialize with closed state
             gsap.set(body, {
                 height: 0,
                 opacity: 0,
-                duration: 0.6,
-                ease: "power3.inOut",
-                onComplete: () => {
-                    setTimeout(() => {
-                        ScrollTrigger.refresh();
-                    }, 300);
-                },
-            }); // Ensure body starts hidden
+                overflow: "hidden", // Ensure no overflow
+            });
 
-            head.addEventListener("click", () => {
+            const toggleAccordion = () => {
                 const isOpen = item.classList.contains("active");
 
                 // Close all items
@@ -35,35 +32,54 @@ export default function () {
                         height: 0,
                         opacity: 0,
                         duration: 0.3,
-                        onComplete: () => {
-                            setTimeout(() => {
-                                ScrollTrigger.refresh();
-                            }, 300);
-                        },
+                        ease: "power3.inOut",
+                        onComplete: () => ScrollTrigger.refresh(),
                     });
                 });
 
                 // Open the clicked item if it was not already open
                 if (!isOpen) {
                     item.classList.add("active");
-                    const bodyHeight = body.scrollHeight; // Get full height of content
+                    const bodyHeight = body.scrollHeight;
                     gsap.to(body, {
                         height: bodyHeight,
                         opacity: 1,
                         duration: 0.3,
+                        ease: "power3.inOut",
                         onComplete: () => {
-                            setTimeout(() => {
-                                lenis.scrollTo(item, {
-                                    offset: -25,
-                                    duration: 1.5,
-                                });
-                            }, 300);
-                            setTimeout(() => {
-                                ScrollTrigger.refresh();
-                            }, 350);
+                            lenis.scrollTo(item, {
+                                offset: -25,
+                                duration: 1.5,
+                            });
+                            ScrollTrigger.refresh();
                         },
                     });
                 }
+            };
+
+            // Event listener for toggling accordion
+            head.addEventListener("click", toggleAccordion);
+
+            // Handle resizing for active items
+            const handleResize = () => {
+                if (item.classList.contains("active")) {
+                    // Temporarily set height to "auto" to calculate scrollHeight correctly
+                    gsap.set(body, { height: "auto" });
+                    const bodyHeight = body.scrollHeight;
+
+                    // Set back to the actual height for smooth animations
+                    gsap.set(body, { height: bodyHeight });
+
+                    // Refresh ScrollTrigger to keep everything synced
+                    ScrollTrigger.refresh();
+                }
+            };
+
+            // Debounce resize events for performance
+            let resizeTimeout;
+            window.addEventListener("resize", () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(handleResize, 200);
             });
         });
     });
