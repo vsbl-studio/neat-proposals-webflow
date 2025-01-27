@@ -33,7 +33,10 @@ export default function () {
                         opacity: 0,
                         duration: 0.3,
                         ease: "power3.inOut",
-                        onComplete: () => ScrollTrigger.refresh(),
+                        onComplete: () => {
+                            ScrollTrigger.refresh();
+                            lenis.update(); // Ensure Lenis recalculates layout
+                        },
                     });
                 });
 
@@ -47,11 +50,13 @@ export default function () {
                         duration: 0.3,
                         ease: "power3.inOut",
                         onComplete: () => {
-                            lenis.scrollTo(item, {
-                                offset: -25,
-                                duration: 1.5,
-                            });
-                            ScrollTrigger.refresh();
+                            // Scroll to the active accordion
+                            setTimeout(() => {
+                                lenis.scrollTo(item, {
+                                    offset: -25,
+                                    duration: 1.5,
+                                });
+                            }, 300);
                         },
                     });
                 }
@@ -72,6 +77,7 @@ export default function () {
 
                     // Refresh ScrollTrigger to keep everything synced
                     ScrollTrigger.refresh();
+                    lenis.update();
                 }
             };
 
@@ -79,7 +85,7 @@ export default function () {
             let resizeTimeout;
             window.addEventListener("resize", () => {
                 clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(handleResize, 200);
+                resizeTimeout = setTimeout(handleResize, 300);
             });
         });
     });
