@@ -10,10 +10,7 @@
 .js-reveal-title {
     opacity: 0;
 }
-.js-reveal-title .text-line-icon,
-.js-reveal-title .text-line-icon-50 {
-    margin-bottom: 1%;
-}
+
 [data-mask-button] .button_icon.w-embed {
     order: 10;
 }

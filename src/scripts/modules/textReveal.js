@@ -7,13 +7,7 @@ export default function () {
         revealTitles.forEach((title) => {
             const splitText = new SplitText(title, { type: "lines" }); // Split text into lines
 
-            const linesTl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: title,
-                    start: "top 80%",
-                    toggleActions: "play none none none",
-                },
-            });
+            const linesTl = gsap.timeline({});
 
             // Animate each line
             splitText.lines.forEach((line, index) => {
@@ -24,14 +18,19 @@ export default function () {
 
                 // Insert the wrapper and move the line inside it
                 line.parentNode.insertBefore(lineWrapper, line);
+                line.classList.add("split-line");
+
                 lineWrapper.appendChild(line);
 
-                linesTl.from(
+                gsap.set(line, { y: "100%" });
+
+                linesTl.to(
                     line,
                     {
-                        y: "100%",
+                        y: "0",
                         duration: 2,
                         ease: customEase,
+                        overwrite: true,
                     },
                     index * 0.12 // Delay each line animation by 0.12s
                 );
