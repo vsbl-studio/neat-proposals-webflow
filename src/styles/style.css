@@ -54,3 +54,13 @@
 .footer-link-arrow {
     order: 100;
 }
+
+.js-accordion-head:hover .info_accordion-icon {
+    transform: rotate(90deg);
+}
+.js-accordion-item.active .js-accordion-head:hover .info_accordion-icon {
+    transform: rotate(0);
+}
+.info_accordion-icon {
+    transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
