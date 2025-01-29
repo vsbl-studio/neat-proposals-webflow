@@ -57,6 +57,10 @@ export default function () {
                                     duration: 1.5,
                                 });
                             }, 300);
+                            setTimeout(() => {
+                                ScrollTrigger.refresh();
+                                lenis.update();
+                            }, 500);
                         },
                     });
                 }

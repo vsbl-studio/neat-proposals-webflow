@@ -64,9 +64,6 @@ export const revealFooter = () => {
         '[data-footer-parallax="content"]'
     );
 
-    // const footerHeight = footerContent.getBoundingClientRect().height;
-    // footer.style.height = footerHeight + "px";
-
     let tl = gsap.timeline({
         scrollTrigger: {
             trigger: footer,
