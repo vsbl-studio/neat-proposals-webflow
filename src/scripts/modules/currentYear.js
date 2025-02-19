@@ -1,4 +1,9 @@
 export default function () {
-    const currentYear = new Date().getFullYear();
-    document.querySelector("[data-year]").innerHTML = currentYear;
+    const yearWrapper = document.querySelector("[data-year]");
+
+    if (yearWrapper) {
+        const currentYear = new Date().getFullYear();
+
+        yearWrapper.innerHTML = currentYear;
+    }
 }
