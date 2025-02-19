@@ -60,26 +60,28 @@ export const syncScrollWithGSAP = () => {
 export const revealFooter = () => {
     const footer = document.querySelector("footer");
 
-    const footerContent = footer.querySelector(
-        '[data-footer-parallax="content"]'
-    );
+    if (footer) {
+        const footerContent = footer.querySelector(
+            '[data-footer-parallax="content"]'
+        );
 
-    let tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: footer,
-            start: "top bottom",
-            end: "bottom bottom",
-            scrub: 0.01,
-        },
-    });
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: footer,
+                start: "top bottom",
+                end: "bottom bottom",
+                scrub: 0.01,
+            },
+        });
 
-    tl.from(
-        footerContent,
-        {
-            yPercent: -50,
-            ease: "linear",
-        },
+        tl.from(
+            footerContent,
+            {
+                yPercent: -50,
+                ease: "linear",
+            },
 
-        "<"
-    );
+            "<"
+        );
+    }
 };

@@ -1,5 +1,4 @@
 import gsap from "gsap";
-import { isMobile } from "../utils/isMobile";
 import { customEase } from "../utils/globalElements";
 
 export default () => {
