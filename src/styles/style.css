@@ -1,16 +1,20 @@
 @import "../../node_modules/lenis/dist/lenis.css";
-@import "../../node_modules/swiper/swiper-bundle.css";
-@import "../../node_modules/overlayscrollbars/styles/overlayscrollbars.css";
 @import "./modules/global.css";
+@import "./modules/fluid-responsive.css";
 @import "./modules/scrollbars.css";
-
 @import "./modules/accordion.css";
 @import "./modules/tooltip.css";
 
 .js-reveal-title {
     opacity: 0;
 }
-
+.split-line,
+[data-mask-text] {
+    transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.split-line {
+    transform: translateY(100%);
+}
 [data-mask-button] .button_icon.w-embed {
     order: 10;
 }
