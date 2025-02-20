@@ -1,7 +1,15 @@
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
-import { customEase } from "../utils/globalElements";
+import CustomEase from "gsap/CustomEase";
+
 export default function () {
+    gsap.registerPlugin(CustomEase);
+
+    CustomEase.create(
+        "custom-3",
+        "M0,0 C0.204,0 0.231,0.447 0.323,0.618 0.368,0.702 0.51,0.878 0.606,0.918 0.668,0.943 0.801,1 1,1 "
+    );
+
     const revealTitles = document.querySelectorAll(".js-reveal-title");
     if (revealTitles.length) {
         revealTitles.forEach((title) => {
@@ -22,15 +30,13 @@ export default function () {
 
                 lineWrapper.appendChild(line);
 
-                gsap.set(line, { y: "100%" });
-
                 linesTl.to(
                     line,
                     {
-                        y: "0",
-                        duration: 2,
-                        ease: customEase,
-                        overwrite: true,
+                        y: 0,
+                        stagger: 0.14,
+                        duration: 0.6,
+                        ease: "custom-3",
                     },
                     index * 0.12 // Delay each line animation by 0.12s
                 );
