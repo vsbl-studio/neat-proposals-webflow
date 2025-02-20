@@ -22,14 +22,12 @@ export default function () {
             });
 
             const toggleAccordion = () => {
-                const isOpen = head
-                    .closest(".js-accordion-item")
-                    .classList.contains("active");
+                const isOpen = item.classList.contains("active");
 
                 // Close all items
                 accordionItems.forEach((i) => {
-                    item.classList.remove("active");
-                    gsap.to(item.querySelector(".js-accordion-body"), {
+                    i.classList.remove("active");
+                    gsap.to(i.querySelector(".js-accordion-body"), {
                         height: 0,
                         opacity: 0,
                         duration: 0.3,
