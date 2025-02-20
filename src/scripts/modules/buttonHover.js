@@ -44,22 +44,12 @@ export default () => {
 
                         gsap.to(lines[0], {
                             y: -textWrapper.clientHeight,
-                            duration: 0.3,
-                            ease: "linear",
-
-                            // stagger: 0.12,
-                            // duration: 0.6,
-                            // ease: "custom",
+                            duration: 0,
                         });
 
                         gsap.to(lines[1], {
                             y: -textWrapper.clientHeight,
-                            duration: 0.3,
-                            ease: "linear",
-
-                            // stagger: 0.12,
-                            // duration: 0.6,
-                            // ease: "custom",
+                            duration: 0,
                         });
                     }
                 });
@@ -71,14 +61,12 @@ export default () => {
 
                         gsap.to(lines[0], {
                             y: 0,
-                            duration: 0.3,
-                            ease: "linear",
+                            duration: 0,
                         });
 
                         gsap.to(lines[1], {
                             y: 0,
-                            duration: 0.3,
-                            ease: "linear",
+                            duration: 0,
                         });
                     }
                 });
